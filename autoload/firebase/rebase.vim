@@ -17,6 +17,10 @@ func firebase#rebase#newbranch_internal(v)
 	keepjumps norm! {
 	call append(line('.') - 1, printf("\n# Branch %1$s\nreset onto\n%2$s\nupdate-ref refs/heads/%1$s\nlabel %1$s", b, c->join("\n"))->split("\n", 1))
 	call cursor(x + len(c) + 6, 1)
+
+	if g:firebase_options.autopush
+		call firebase#rebase#push(b)
+	endif
 endfunc
 
 func firebase#rebase#newbranch_n()
@@ -37,6 +41,10 @@ endfunc
 
 func firebase#rebase#branchline(b)
 	return 1 + getline(1, '$')->indexof({_, v -> 1 + match(v, printf("u\\(pdate-ref\\)\\? refs/heads/%s", a:b))})
+endfunc
+
+func firebase#rebase#labelline(b)
+	return 1 + getline(1, '$')->indexof({_, v -> 1 + match(v, printf("^l\\(abel\\)\\? %s$", a:b))})
 endfunc
 
 func firebase#rebase#domove(w, i)
@@ -71,7 +79,7 @@ func firebase#rebase#movecommits()
 endfunc
 
 func firebase#rebase#push(branch)
-	let l = firebase#rebase#branchline(a:branch)
+	let l = firebase#rebase#labelline(a:branch)
 	if l && empty(getline(l + 1))
 		call append(l, printf("exec git push origin %s", a:branch))
 	endif
