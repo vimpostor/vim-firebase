@@ -1,4 +1,4 @@
-func firebase#util#choose(arr, callback)
+func firebase#util#choose(title, arr, callback)
 	let l = len(a:arr)
 	if l < 2
 		" no need to choose
@@ -12,6 +12,6 @@ func firebase#util#choose(arr, callback)
 		let win = nvim_open_win(buf, 1, #{relative: "cursor", bufpos: getpos('.')[1:2], width: len(a:arr[0]), height: l, style: "minimal"})
 		call nvim_buf_set_keymap(buf, "n", "<CR>", ':let a = line(".")<CR>:close<CR>:call ' . a:callback . '(-1, a)<CR>', #{})
 	else
-		call popup_menu(a:arr, #{callback: a:callback})
+		call popup_menu(a:arr, #{title: a:title, callback: a:callback})
 	endif
 endfunc

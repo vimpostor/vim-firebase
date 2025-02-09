@@ -42,7 +42,7 @@ func firebase#rebase#move_internal(v)
 	let s:x = line(".'<"[a:v:2*a:v])
 	let s:y = line(".'>"[a:v:2*a:v])
 	let s:branchlist = firebase#rebase#branchlist()
-	call firebase#util#choose(s:branchlist, 'firebase#rebase#domove')
+	call firebase#util#choose("Move to", s:branchlist, 'firebase#rebase#domove')
 endfunc
 
 func firebase#rebase#movecommit()
