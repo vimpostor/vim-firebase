@@ -61,5 +61,12 @@ API							*firebase-api*
 		Add a push instruction for the branch under the cursor. For
 		doing this automatically see |firebase_options_autopush|.
 
+	firebase#remote#copylink()			*firebase#remote#copylink()*
+		Copy a permalink to the current file.
+
+	firebase#remote#copylink(v)			*firebase#remote#copylink_cursor()*
+		Copies a permalink pointing to the current line or to the
+		current span of lines if in |visual-mode| and |v| is truthy.
+
 ==============================================================================
 	vim:tw=78:sw=4:ts=8:ft=help:norl:noet:

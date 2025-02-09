@@ -14,7 +14,7 @@ Plug 'vimpostor/vim-firebase'
 
 ## What's up with the name?
 
-Similar to how [tpope](https://github.com/tpope) named the infamous Git plugin fu**git**ive, this plugin is named fi**rebase** after its main functionality. It has nothing to do with the unrelated popular [Cloud API](https://firebase.google.com).
+Similar to how [tpope](https://github.com/tpope) named the infamous Git plugin _fu_**git**_ive_, this plugin is named _fi_**rebase** after its main functionality. It has nothing to do with the unrelated popular [Cloud API](https://firebase.google.com).
 
 ## How do I configure this plugin?
 
