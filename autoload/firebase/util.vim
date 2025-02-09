@@ -12,6 +12,6 @@ func firebase#util#choose(title, arr, callback)
 		let win = nvim_open_win(buf, 1, #{relative: "cursor", row: 0, col: 0, title: a:title, title_pos: "center", border: "rounded", width: len(a:arr[0]), height: l, style: "minimal"})
 		call nvim_buf_set_keymap(buf, "n", "<CR>", ':let a = line(".")<CR>:close<CR>:call ' . a:callback . '(-1, a)<CR>', #{})
 	else
-		call popup_menu(a:arr, #{title: a:title, callback: a:callback})
+		call popup_menu(a:arr, #{title: a:title, line: "cursor+1", col: "cursor", pos: "topleft", callback: a:callback})
 	endif
 endfunc
