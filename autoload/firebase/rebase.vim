@@ -26,8 +26,12 @@ func firebase#rebase#newbranch_v()
 	call firebase#rebase#newbranch_internal(1)
 endfunc
 
+func firebase#rebase#matchbranches(l)
+	return filter(a:l, 'v:val =~# "^u\\(pdate-ref\\)\\? refs/heads/"')->map({_, v -> matchlist(v, 'refs/heads/\(.*\)')[1]})
+endfunc
+
 func firebase#rebase#branchlist()
-	return getline(1, '$')->filter('v:val =~# "^u\\(pdate-ref\\)\\? refs/heads/"')->map({_, v -> matchlist(v, 'refs/heads/\(.*\)')[1]})
+	return firebase#rebase#matchbranches(getline(1, '$'))
 endfunc
 
 func firebase#rebase#branchline(b)
@@ -70,4 +74,9 @@ func firebase#rebase#push(branch)
 	if l && empty(getline(l + 1))
 		call append(l, printf("exec git push origin %s", a:branch))
 	endif
+endfunc
+
+func firebase#rebase#push_current()
+	let b = firebase#rebase#matchbranches(getline('.', '$'))->get(0, '')
+	call firebase#rebase#push(b)
 endfunc

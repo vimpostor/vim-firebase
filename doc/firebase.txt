@@ -27,7 +27,8 @@ The following keys are available:
 		refer to |firebase-api| for how to setup your own keybindings.
 
 	"autopush"					*firebase_options_autopush*
-		If truthy, automatically push modified branches.
+		If truthy, automatically push modified branches. For doing
+		this manually see |firebase#rebase#push_current()|.
 
 ------------------------------------------------------------------------------
 API							*firebase-api*
@@ -45,6 +46,10 @@ API							*firebase-api*
 
 	firebase#rebase#movecommits()			*firebase#rebase#movecommits()*
 		Move the commits under the cursor to a different branch.
+
+	firebase#rebase#push_current()			*firebase#rebase#push_current()*
+		Add a push instruction for the branch under the cursor. For
+		doing this automatically see |firebase_options_autopush|.
 
 ==============================================================================
 	vim:tw=78:sw=4:ts=8:ft=help:norl:noet:
