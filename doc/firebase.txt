@@ -22,13 +22,19 @@ which is a |Dictionary| containing all options as key-value pairs. The default
 options can be retrieved with |firebase#default_options()|.
 The following keys are available:
 
-	"default_mappings"				*firebase_options_default_mappings*
-		If truthy, use the default keybindings. When you disable this,
-		refer to |firebase-api| for how to setup your own keybindings.
-
 	"autopush"					*firebase_options_autopush*
 		If truthy, automatically push modified branches. For doing
 		this manually see |firebase#rebase#push_current()|.
+
+	"branch_format"					*firebase_options_branch_format*
+		A |printf()| compatible format string to be used when naming
+		branches. The `%s` will be replaced with the branch name given
+		by the user. A common usecase is setting it to `"wip/user/%s"`
+		or `"feat/%s"` to avoid typing boilerplate.
+
+	"default_mappings"				*firebase_options_default_mappings*
+		If truthy, use the default keybindings. When you disable this,
+		refer to |firebase-api| for how to setup your own keybindings.
 
 ------------------------------------------------------------------------------
 API							*firebase-api*

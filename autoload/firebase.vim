@@ -9,7 +9,8 @@ endfunc
 
 func firebase#default_options()
 	return #{
-		\ default_mappings: 1,
 		\ autopush: 0,
+		\ branch_format: "%s",
+		\ default_mappings: 1,
 	\ }
 endfunc

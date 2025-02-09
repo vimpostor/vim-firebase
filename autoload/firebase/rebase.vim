@@ -7,6 +7,7 @@ func firebase#rebase#newbranch_internal(v)
 	if empty(b)
 		return
 	endif
+	let b = printf(g:firebase_options.branch_format, b)
 
 	let x = line(".'<"[a:v:2*a:v])
 	let y = line(".'>"[a:v:2*a:v])
