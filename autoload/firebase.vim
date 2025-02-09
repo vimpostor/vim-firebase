@@ -9,6 +9,8 @@ func firebase#init()
 	if g:firebase_options.autocursor
 		au Filetype gitrebase call firebase#rebase#autocursor()
 	endif
+
+	au Filetype gitcommit setlocal omnifunc=firebase#commit#complete_issue
 endfunc
 
 func firebase#default_options()
