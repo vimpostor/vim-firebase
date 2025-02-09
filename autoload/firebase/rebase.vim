@@ -4,6 +4,10 @@ let s:y = 0
 
 func firebase#rebase#newbranch_internal(v)
 	let b = input('Branch name: ')
+	if empty(b)
+		return
+	endif
+
 	let x = line(".'<"[a:v:2*a:v])
 	let y = line(".'>"[a:v:2*a:v])
 	let c = getline(x, y)
@@ -26,6 +30,10 @@ func firebase#rebase#branchlist()
 	return getline(1, '$')->filter('v:val =~# "^u\\(pdate-ref\\)\\? refs/heads/"')->map({_, v -> matchlist(v, 'refs/heads/\(.*\)')[1]})
 endfunc
 
+func firebase#rebase#branchline(b)
+	return 1 + getline(1, '$')->indexof({_, v -> 1 + match(v, printf("u\\(pdate-ref\\)\\? refs/heads/%s", a:b))})
+endfunc
+
 func firebase#rebase#domove(w, i)
 	if a:i < 1
 		return
@@ -34,8 +42,12 @@ func firebase#rebase#domove(w, i)
 	let b = s:branchlist[a:i - 1]
 	let c = getline(s:x, s:y)
 	call deletebufline('%', s:x, s:y)
-	let l = getline(1, '$')->indexof({_, v -> 1 + match(v, printf("u\\(pdate-ref\\)\\? refs/heads/%s", b))})
-	call append(l, c)
+	let l = firebase#rebase#branchline(b)
+	call append(l - 1, c)
+
+	if g:firebase_options.autopush
+		call firebase#rebase#push(b)
+	endif
 endfunc
 
 func firebase#rebase#move_internal(v)
@@ -51,4 +63,11 @@ endfunc
 
 func firebase#rebase#movecommits()
 	call firebase#rebase#move_internal(1)
+endfunc
+
+func firebase#rebase#push(branch)
+	let l = firebase#rebase#branchline(a:branch)
+	if l && empty(getline(l + 1))
+		call append(l, printf("exec git push origin %s", a:branch))
+	endif
 endfunc

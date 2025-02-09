@@ -26,6 +26,9 @@ The following keys are available:
 		If truthy, use the default keybindings. When you disable this,
 		refer to |firebase-api| for how to setup your own keybindings.
 
+	"autopush"					*firebase_options_autopush*
+		If truthy, automatically push modified branches.
+
 ------------------------------------------------------------------------------
 API							*firebase-api*
 

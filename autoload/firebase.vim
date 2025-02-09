@@ -10,5 +10,6 @@ endfunc
 func firebase#default_options()
 	return #{
 		\ default_mappings: 1,
+		\ autopush: 0,
 	\ }
 endfunc
