@@ -2,6 +2,8 @@
 
 This plugin extends the git functionality of [vim-fugitive](https://github.com/tpope/vim-fugitive) and mostly enhances handling of the rebase todo list.
 
+[![asciicast](https://asciinema.org/a/brnkYGIVYmstJwKcUrfZ7AWpY.svg)](https://asciinema.org/a/brnkYGIVYmstJwKcUrfZ7AWpY)
+
 # Installation
 
 Using **vim-plug**:
