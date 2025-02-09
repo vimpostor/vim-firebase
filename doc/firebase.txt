@@ -37,5 +37,11 @@ API							*firebase-api*
 		Creates a new branch that includes all `pick` lines from the
 		selected lines in |visual-mode|.
 
+	firebase#rebase#movecommit()			*firebase#rebase#movecommit()*
+		Move the commit under the cursor to a different branch.
+
+	firebase#rebase#movecommits()			*firebase#rebase#movecommits()*
+		Move the commits under the cursor to a different branch.
+
 ==============================================================================
 	vim:tw=78:sw=4:ts=8:ft=help:norl:noet:

@@ -19,3 +19,7 @@ Please consult the extensive help page under `:help firebase-configure`.
 ## What's up with the name?
 
 Similar to how [tpope](https://github.com/tpope) named the infamous Git plugin fu**git**ive, this plugin is named fi**rebase** after its main functionality. It's unfortunate (but unproblematic given the different domains) that the naming collides with an unrelated popular [Cloud API](https://firebase.google.com).
+
+## Do I need to install fugitive to use this plugin?
+
+No, fugitive is not a dependency for this plugin.
