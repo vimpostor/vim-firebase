@@ -81,7 +81,7 @@ endfunc
 func firebase#rebase#push(branch)
 	let l = firebase#rebase#labelline(a:branch)
 	if l && empty(getline(l + 1))
-		call append(l, printf("exec git push origin %s", a:branch))
+		call append(l, printf("exec git push origin refs/rewritten/%1$s:refs/heads/%1$s", a:branch))
 	endif
 endfunc
 
