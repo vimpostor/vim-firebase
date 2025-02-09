@@ -33,3 +33,25 @@ func firebase#remote#reponame()
 	let u = firebase#remote#weburl()
 	return strcharpart(u, stridx(u, "/", 8) + 1)
 endfunc
+
+func firebase#remote#permalink()
+	return printf("%s/blob/%s/%s", firebase#remote#weburl(), firebase#commit#head(), firebase#util#repopath(expand('%')))
+endfunc
+
+func firebase#remote#permalink_cursor(v)
+	let x = line(".'<"[a:v:2*a:v])
+	let y = line(".'>"[a:v:2*a:v])
+	let r = firebase#remote#permalink() . printf("#L%d", x)
+	if a:v
+		let r = r . printf("-%d", y)
+	endif
+	return r
+endfunc
+
+func firebase#remote#copylink()
+	call firebase#util#copy_clipboard(firebase#remote#permalink())
+endfunc
+
+func firebase#remote#copylink_cursor(v)
+	call firebase#util#copy_clipboard(firebase#remote#permalink_cursor(a:v))
+endfunc

@@ -5,3 +5,7 @@ func firebase#commit#complete_issue(findstart, base)
 	endif
 	return firebase#remote#api#issues(a:base)
 endfunc
+
+func firebase#commit#head()
+	return trim(system("git rev-parse HEAD"))
+endfunc

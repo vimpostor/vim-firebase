@@ -15,3 +15,12 @@ func firebase#util#choose(title, arr, callback)
 		call popup_menu(a:arr, #{title: a:title, line: "cursor+1", col: "cursor", pos: "topleft", callback: a:callback})
 	endif
 endfunc
+
+func firebase#util#repopath(file)
+	return trim(system("git ls-files --full-name " . fnameescape(a:file)))
+endfunc
+
+func firebase#util#copy_clipboard(s)
+	let @+ = a:s
+	echo a:s
+endfunc
