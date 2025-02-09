@@ -22,6 +22,10 @@ which is a |Dictionary| containing all options as key-value pairs. The default
 options can be retrieved with |firebase#default_options()|.
 The following keys are available:
 
+	"autocursor"					*firebase_options_autocursor*
+		If truthy, automatically position the cursor at the end of the
+		rebase todo-list.
+
 	"autopush"					*firebase_options_autopush*
 		If truthy, automatically push modified branches. For doing
 		this manually see |firebase#rebase#push_current()|.

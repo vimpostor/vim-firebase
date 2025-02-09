@@ -81,3 +81,11 @@ func firebase#rebase#push_current()
 	let b = firebase#rebase#matchbranches(getline('.', '$'))->get(0, '')
 	call firebase#rebase#push(b)
 endfunc
+
+func firebase#rebase#autocursor()
+	" it's quite the bad heuristic, but we try to find the last reset onto
+	let l = getline(1, '$')->reverse()->indexof('v:val =~# "^\\(rese\\)\\?t onto$"')
+	if l >= 0
+		call cursor(line('$') - l + 1, 1)
+	endif
+endfunc
