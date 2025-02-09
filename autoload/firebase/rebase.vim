@@ -27,6 +27,10 @@ func firebase#rebase#branchlist()
 endfunc
 
 func firebase#rebase#domove(w, i)
+	if a:i < 1
+		return
+	endif
+
 	let b = s:branchlist[a:i - 1]
 	let c = getline(s:x, s:y)
 	call deletebufline('%', s:x, s:y)
