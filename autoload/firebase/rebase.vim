@@ -94,6 +94,8 @@ func firebase#rebase#autocursor()
 	" it's quite the bad heuristic, but we try to find the last reset onto
 	let l = getline(1, '$')->reverse()->indexof('v:val =~# "^\\(rese\\)\\?t onto$"')
 	if l >= 0
-		call cursor(line('$') - l + 1, 1)
+		call cursor(line('$') - l, 1)
+		" skip over additional merge lines
+		call search('^[^m]', 'W')
 	endif
 endfunc
