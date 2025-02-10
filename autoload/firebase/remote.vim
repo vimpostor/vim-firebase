@@ -34,6 +34,16 @@ func firebase#remote#reponame()
 	return strcharpart(u, stridx(u, "/", 8) + 1)
 endfunc
 
+func firebase#remote#pushref_format()
+	let u = firebase#remote#url()
+	for i in g:firebase_options.pushref_formats
+		if u =~# i.remote
+			return i.push
+		endif
+	endfor
+	return "refs/heads/%s"
+endfunc
+
 func firebase#remote#permalink()
 	return printf("%s/blob/%s/%s", firebase#remote#weburl(), firebase#commit#head(), firebase#util#repopath(expand('%')))
 endfunc

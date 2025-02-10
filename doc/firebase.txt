@@ -40,6 +40,22 @@ The following keys are available:
 		If truthy, use the default keybindings. When you disable this,
 		refer to |firebase-api| for how to setup your own keybindings.
 
+	"pushref_formats"				*firebase_options_pushref_formats*
+		An array of |Dictionary| elements, where the `push` key
+		describes a pushref format string to be used for the remote
+		given with the `remote` key. Remotes will be matched using the
+		|=~#| operator. The first matching entry will be used and
+		|printf()| will replace `%s` (if any) in the `push` key with
+		the branch name.
+		If no remote matches, `"refs/heads/%s"` will be used as the
+		default pushref format string.
+		For example to use a Gerrit style pushref for matching hosts,
+		set this option to:
+>
+	[ #{remote: 'gerrit\.foo\.com', push: 'refs/for/master'},
+	\ #{remote: 'gerrit2\.bar\.com', push: 'refs/for/dev'} ]
+<
+
 ------------------------------------------------------------------------------
 API							*firebase-api*
 

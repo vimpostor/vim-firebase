@@ -24,5 +24,6 @@ func firebase#default_options()
 		\ autopush: 0,
 		\ branch_format: "%s",
 		\ default_mappings: 1,
+		\ pushref_formats: [],
 	\ }
 endfunc
