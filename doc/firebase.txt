@@ -49,11 +49,13 @@ The following keys are available:
 		the branch name.
 		If no remote matches, `"refs/heads/%s"` will be used as the
 		default pushref format string.
+		If the pushref format is the empty string, pushing will be
+		disabled completely for that remote.
 		For example to use a Gerrit style pushref for matching hosts,
 		set this option to:
 >
 	[ #{remote: 'gerrit\.foo\.com', push: 'refs/for/master'},
-	\ #{remote: 'gerrit2\.bar\.com', push: 'refs/for/dev'} ]
+	\ #{remote: 'gerrit\.bar\.com', push: 'refs/for/dev'} ]
 <
 
 ------------------------------------------------------------------------------
