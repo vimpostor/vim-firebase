@@ -1,7 +1,6 @@
 func firebase#util#choose(title, arr, callback)
 	let l = len(a:arr)
 	if l < 2
-		" no need to choose
 		call function(a:callback)(-1, -1 + l * 2)
 		return
 	endif

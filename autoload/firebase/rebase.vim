@@ -40,11 +40,11 @@ func firebase#rebase#branchlist()
 endfunc
 
 func firebase#rebase#branchline(b)
-	return 1 + getline(1, '$')->indexof({_, v -> 1 + match(v, printf("u\\(pdate-ref\\)\\? refs/heads/%s", a:b))})
+	return 1 + getline(1, '$')->indexof({_, v -> v ==# "update-ref refs/heads/" . a:b || v ==# "u refs/heads/" . a:b})
 endfunc
 
 func firebase#rebase#labelline(b)
-	return 1 + getline(1, '$')->indexof({_, v -> 1 + match(v, printf("^l\\(abel\\)\\? %s$", a:b))})
+	return 1 + getline(1, '$')->indexof({_, v -> v ==# "label " . a:b || v ==# "l " . a:b})
 endfunc
 
 func firebase#rebase#domove(w, i)
