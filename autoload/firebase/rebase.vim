@@ -32,7 +32,7 @@ func firebase#rebase#newbranch_v()
 endfunc
 
 func firebase#rebase#matchbranches(l)
-	return filter(a:l, 'v:val =~# "^u\\(pdate-ref\\)\\? refs/heads/"')->map({_, v -> matchlist(v, 'refs/heads/\(.*\)')[1]})
+	return filter(a:l, 'v:val =~# "^u\\(pdate-ref\\)\\? refs/heads/" || v:val =~# "^l\\(abel\\)\\? "')->map({_, v -> matchlist(v, '\(refs/heads/\|label \)\(.*\)')[2]})->uniq()->filter('firebase#rebase#branchline(v:val)')
 endfunc
 
 func firebase#rebase#branchlist()
