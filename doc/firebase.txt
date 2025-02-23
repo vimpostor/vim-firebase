@@ -6,6 +6,7 @@ CONTENTS						*firebase-contents*
 Introduction					|firebase-introduction|
 Configuration					|firebase-configure|
 Api						|firebase-api|
+Mappings					|firebase-mappings|
 
 ==============================================================================
 INTRODUCTION						*firebase-introduction*
@@ -37,8 +38,9 @@ The following keys are available:
 		or `"feat/%s"` to avoid typing boilerplate.
 
 	"default_mappings"				*firebase_options_default_mappings*
-		If truthy, use the default keybindings. When you disable this,
-		refer to |firebase-api| for how to setup your own keybindings.
+		If truthy, use the default keybindings as defined in
+		|firebase-mappings|. When you disable this, refer to
+		|firebase-api| for how to setup your own keybindings.
 
 	"pushref_formats"				*firebase_options_pushref_formats*
 		An array of |Dictionary| elements, where the `push` key
@@ -85,6 +87,18 @@ API							*firebase-api*
 	firebase#remote#copylink(v)			*firebase#remote#copylink_cursor()*
 		Copies a permalink pointing to the current line or to the
 		current span of lines if in |visual-mode| and |v| is truthy.
+
+
+------------------------------------------------------------------------------
+MAPPINGS						*firebase-mappings*
+
+The default keybindings are enabled with the |firebase_options_default_mappings| option and are as follows:
+
+    <LocalLeader>n					|firebase#rebase#newbranch_n()|
+    <LocalLeader>m					|firebase#rebase#movecommit()|
+    <LocalLeader>p					|firebase#rebase#push_current()|
+    <Leader>yg						|firebase#remote#copylink()|
+    <LocalLeader>yg					|firebase#remote#copylink_cursor()|
 
 ==============================================================================
 	vim:tw=78:sw=4:ts=8:ft=help:norl:noet:
