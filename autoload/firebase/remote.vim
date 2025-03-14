@@ -45,7 +45,12 @@ func firebase#remote#pushref_format()
 endfunc
 
 func firebase#remote#permalink()
-	return printf("%s/blob/%s/%s", firebase#remote#weburl(), firebase#commit#head(), firebase#util#repopath(expand('%')))
+	let weburl = firebase#remote#weburl()
+	let blob = "blob"
+	if !stridx(weburl, "https://codeberg.org")
+		let blob = "src/commit"
+	endif
+	return printf("%s/%s/%s/%s", weburl, blob, firebase#commit#head(), firebase#util#repopath(expand('%')))
 endfunc
 
 func firebase#remote#permalink_cursor(v)
