@@ -12,6 +12,8 @@ func firebase#init()
 		xnoremap <silent> <LocalLeader>yg :<C-U>call firebase#remote#copylink_cursor(1)<CR>
 	endif
 
+	command -nargs=* -complete=customlist,firebase#jump#compl FirebaseJump call firebase#jump#jump(<q-args>)
+
 	if g:firebase_options.autocursor
 		au Filetype gitrebase call firebase#rebase#autocursor()
 	endif
