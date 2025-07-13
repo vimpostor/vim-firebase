@@ -12,7 +12,10 @@ endfunc
 func firebase#remote#weburl()
 	let u = firebase#remote#url()
 
-	if stridx(u, "http") != 0
+	if stridx(u, "git://") == 0
+		let u = "https://" . strcharpart(u, 6)
+	elseif stridx(u, "http") != 0
+		" assume git@host:namespace/repo.git style URL
 		" replace only the first column
 		let u = substitute(u, ":", "/", "")
 
@@ -44,23 +47,43 @@ func firebase#remote#pushref_format()
 	return "refs/heads/%s"
 endfunc
 
-func firebase#remote#permalink()
+func firebase#remote#permalink_format(linestart, lineend)
+	let format = "%1$s/%2$s/%3$s/%4$s"
 	let weburl = firebase#remote#weburl()
 	let blob = "blob"
+	let ref = firebase#commit#head()
+	let path = firebase#util#repopath(expand('%'))
+	let supportsrange = 1
+	let linemarker = "L"
+
 	if !stridx(weburl, "https://codeberg.org")
 		let blob = "src/commit"
+	elseif !stridx(weburl, "https://code.qt.io")
+		let format = "%1$s/%2$s/%4$s?id=%3$s"
+		let weburl = "https://code.qt.io/cgit" . strcharpart(weburl, 18) . ".git"
+		let blob = "tree"
+		let supportsrange = 0
+		let linemarker = "n"
 	endif
-	return printf("%s/%s/%s/%s", weburl, blob, firebase#commit#head(), firebase#util#repopath(expand('%')))
+
+	let res = printf(format, weburl, blob, ref, path)
+	if len(a:linestart)
+		let res .= "#" . linemarker . a:linestart
+		if supportsrange && len(a:lineend)
+			let res .= "-" . linemarker . a:lineend
+		endif
+	endif
+	return res
+endfunc
+
+func firebase#remote#permalink()
+	return firebase#remote#permalink_format("", "")
 endfunc
 
 func firebase#remote#permalink_cursor(v)
 	let x = line(".'<"[a:v:2*a:v])
 	let y = line(".'>"[a:v:2*a:v])
-	let r = firebase#remote#permalink() . printf("#L%d", x)
-	if a:v
-		let r = r . printf("-%d", y)
-	endif
-	return r
+	return firebase#remote#permalink_format(x, a:v ? y : "")
 endfunc
 
 func firebase#remote#copylink()
