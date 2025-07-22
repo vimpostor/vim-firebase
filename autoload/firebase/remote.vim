@@ -1,5 +1,9 @@
 func firebase#remote#url()
-	return trim(system('git config remote.origin.url'))
+	let r = trim(system('git config remote.origin.url'))
+	if empty(r)
+		let r = trim(system('fossil remote'))
+	endif
+	return r
 endfunc
 
 func firebase#remote#trimgit(s)
@@ -54,7 +58,8 @@ func firebase#remote#permalink_format(linestart, lineend)
 	let ref = firebase#commit#head()
 	let path = firebase#util#repopath(expand('%'))
 	let supportsrange = 1
-	let linemarker = "L"
+	let linemark = "#L"
+	let repeatlinemark = "-L"
 
 	if !stridx(weburl, "https://codeberg.org")
 		let blob = "src/commit"
@@ -63,14 +68,21 @@ func firebase#remote#permalink_format(linestart, lineend)
 		let weburl = "https://code.qt.io/cgit" . strcharpart(weburl, 18) . ".git"
 		let blob = "tree"
 		let supportsrange = 0
-		let linemarker = "n"
+		let linemark = "#n"
+	elseif !stridx(weburl, "https://chiselapp.com")
+		let format = "%1$s/%2$s?name=%4$s&ci=%3$s"
+		let blob = "file"
+		let ref = json_decode(system("fossil json status")).payload.checkout.uuid
+		let path = expand('%')
+		let linemark = "&ln="
+		let repeatlinemark = "-"
 	endif
 
 	let res = printf(format, weburl, blob, ref, path)
 	if len(a:linestart)
-		let res .= "#" . linemarker . a:linestart
+		let res .= linemark . a:linestart
 		if supportsrange && len(a:lineend)
-			let res .= "-" . linemarker . a:lineend
+			let res .= repeatlinemark . a:lineend
 		endif
 	endif
 	return res
