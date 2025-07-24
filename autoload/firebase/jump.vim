@@ -1,5 +1,6 @@
 func firebase#jump#jump(s)
-	cexpr system('/usr/share/git/git-jump/git-jump --stdout ' . a:s)
+	let args = len(a:s) ? a:s : "diff HEAD HEAD~1"
+	cexpr system('/usr/share/git/git-jump/git-jump --stdout ' . args)
 endfunc
 
 func firebase#jump#compl(a, l, p)
