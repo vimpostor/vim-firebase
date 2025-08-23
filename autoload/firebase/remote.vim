@@ -6,6 +6,15 @@ func firebase#remote#url()
 	return r
 endfunc
 
+func firebase#remote#trimusername(s)
+	" assume https://
+	let a = stridx(a:s, "@")
+	if a == -1 || stridx(a:s, "@") > stridx(a:s, "/", 8) " only replace @ in domain part
+		return a:s
+	endif
+	return "https://" . strpart(a:s, a + 1)
+endfunc
+
 func firebase#remote#trimgit(s)
 	if stridx(a:s, ".git", len(a:s) - 4) < 0
 		return a:s
@@ -33,7 +42,7 @@ func firebase#remote#weburl()
 		let u = "https://" . strcharpart(u, 4)
 	endif
 
-	return firebase#remote#trimgit(u)
+	return firebase#remote#trimusername(firebase#remote#trimgit(u))
 endfunc
 
 func firebase#remote#reponame()
