@@ -16,7 +16,7 @@ endfunc
 func firebase#remote#weburl()
 	let u = firebase#remote#url()
 
-	if stridx(u, "git://") == 0
+	if !stridx(u, "git://") || !stridx(u, "ssh://")
 		let u = "https://" . strcharpart(u, 6)
 	elseif stridx(u, "http") != 0
 		" assume git@host:namespace/repo.git style URL
