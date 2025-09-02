@@ -97,7 +97,7 @@ COMMANDS						*firebase-commands*
 		verbatim to `git-jump`.
 		For example the hunks of the current working tree diff can be
 		retrieved by passing `diff HEAD`.
-		If no argument is provided, then `diff HEAD HEAD~1` will be
+		If no argument is provided, then `diff HEAD~1 HEAD` will be
 		used by default, i.e. the diff of the last commit.
 		Refer to the upstream documentation for more information:
 		https://github.com/git/git/tree/master/contrib/git-jump
