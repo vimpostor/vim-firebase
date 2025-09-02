@@ -88,6 +88,19 @@ API							*firebase-api*
 		Copies a permalink pointing to the current line or to the
 		current span of lines if in |visual-mode| and |v| is truthy.
 
+------------------------------------------------------------------------------
+COMMANDS						*firebase-commands*
+
+	FirebaseJump					*:FirebaseJump*
+		Uses the `git-jump` support script to populate the |quickfix|
+		list with hunk locations. The arguments will be passed along
+		verbatim to `git-jump`.
+		For example the hunks of the current working tree diff can be
+		retrieved by passing `diff HEAD`.
+		If no argument is provided, then `diff HEAD HEAD~1` will be
+		used by default, i.e. the diff of the last commit.
+		Refer to the upstream documentation for more information:
+		https://github.com/git/git/tree/master/contrib/git-jump
 
 ------------------------------------------------------------------------------
 MAPPINGS						*firebase-mappings*
