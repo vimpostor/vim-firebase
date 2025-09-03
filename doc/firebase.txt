@@ -6,6 +6,7 @@ CONTENTS						*firebase-contents*
 Introduction					|firebase-introduction|
 Configuration					|firebase-configure|
 Api						|firebase-api|
+Commands					|firebase-commands|
 Mappings					|firebase-mappings|
 
 ==============================================================================
