@@ -61,6 +61,11 @@ The following keys are available:
 	\ #{remote: 'gerrit\.bar\.com', push: 'refs/for/dev'} ]
 <
 
+	"remotes_preference"				*firebase_options_remotes_preference*
+		An array of remote names to be considered for push operations
+		in descending order of preference. The first existing remote
+		will be used.
+
 ------------------------------------------------------------------------------
 API							*firebase-api*
 

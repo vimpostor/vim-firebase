@@ -86,12 +86,19 @@ func firebase#rebase#pushref(branch)
 	return printf(f, a:branch)
 endfunc
 
+func firebase#rebase#prefered_remote()
+	let remotes = systemlist("git remote")
+	let candidates = g:firebase_options.remotes_preference->filter({_, v -> index(remotes, v) + 1})
+	return get(candidates, 0, "origin")
+endfunc
+
 func firebase#rebase#push(branch)
 	let l = firebase#rebase#labelline(a:branch)
 	if l && empty(getline(l + 1))
 		let pushref = firebase#rebase#pushref(a:branch)
 		if len(pushref)
-			call append(l, printf("exec git push origin refs/rewritten/%s:%s", a:branch, pushref))
+			let remote = firebase#rebase#prefered_remote()
+			call append(l, printf("exec git push %s refs/rewritten/%s:%s", remote, a:branch, pushref))
 		endif
 	endif
 endfunc

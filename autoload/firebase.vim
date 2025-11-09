@@ -28,5 +28,6 @@ func firebase#default_options()
 		\ branch_format: "%s",
 		\ default_mappings: 1,
 		\ pushref_formats: [],
+		\ remotes_preference: ["origin"],
 	\ }
 endfunc
