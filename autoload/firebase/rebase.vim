@@ -129,6 +129,6 @@ func firebase#rebase#autocursor()
 	if l >= 0
 		call cursor(line('$') - l, 1)
 		" skip over additional merge lines
-		call search('^[^m]', 'W')
+		call search('^\([^m]\|$\)', 'W')
 	endif
 endfunc
