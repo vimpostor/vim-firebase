@@ -15,7 +15,7 @@ func firebase#init()
 	command -nargs=* -complete=customlist,firebase#jump#compl FirebaseJump call firebase#jump#jump(<q-args>)
 
 	if g:firebase_options.autocursor
-		au Filetype gitrebase call firebase#rebase#autocursor()
+		au Filetype gitrebase call firebase#rebase#trimlabelspace() | call firebase#rebase#autocursor()
 	endif
 
 	au Filetype gitcommit setlocal omnifunc=firebase#commit#complete_issue

@@ -108,6 +108,21 @@ func firebase#rebase#push_current()
 	call firebase#rebase#push(b)
 endfunc
 
+func firebase#rebase#trimlabelspace()
+	let i = 1
+	while i < line("$")
+		let l = getline(i)
+		if l =~# '^u\(pdate-ref\)\? refs/heads/'
+			let b = matchlist(l, '\(refs/heads/\)\(.*\)')[2]
+			if empty(getline(i + 1)) && getline(i + 2) =~# '^l\(abel\)\? ' . b
+				call deletebufline(bufname(), i + 1)
+				let i += 1
+			endif
+		endif
+		let i += 1
+	endwhile
+endfunc
+
 func firebase#rebase#autocursor()
 	" it's quite the bad heuristic, but we try to find the last reset onto
 	let l = getline(1, '$')->reverse()->indexof('v:val =~# "^\\(rese\\)\\?t onto$"')
