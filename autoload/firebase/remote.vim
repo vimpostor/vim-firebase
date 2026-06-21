@@ -82,7 +82,7 @@ func firebase#remote#permalink_format(linestart, lineend)
 		let format = "%1$s/%2$s?name=%4$s&ci=%3$s"
 		let blob = "file"
 		let ref = json_decode(system("fossil json status")).payload.checkout.uuid
-		let path = expand('%')
+		let path = expand('%:.')
 		let linemark = "&ln="
 		let repeatlinemark = "-"
 	endif
